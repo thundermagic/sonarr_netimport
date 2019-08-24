@@ -1,0 +1,7 @@
+FROM arm32v7/python:3.6-alpine
+
+RUN pip install requests
+
+COPY ./sonarr_list.py .
+
+CMD [ "python", "./sonarr_list.py" ]
