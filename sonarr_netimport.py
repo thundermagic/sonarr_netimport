@@ -63,6 +63,10 @@ def add_shows_sonarr(tvdb_shows: set) -> dict:
 
 if __name__ == '__main__':
 
+    sync_interval = os.environ.get('SYNC_INTERVAL')
+    if sync_interval is None:
+        raise ValueError('Sync interval cannot be empty')
+
     tvdb_username = os.environ.get('TVDB_USERNAME')
     tvdb_user_key = os.environ.get('TVDB_USER_KEY')
     tvdb_api_key = os.environ.get('TVDB_API_KEY')
@@ -70,6 +74,14 @@ if __name__ == '__main__':
     sonarr_ip = os.environ.get('SONARR_IP')
     sonarr_port = os.environ.get('SONARR_PORT')
     sonarr_api_key = os.environ.get('SONARR_API_KEY')
+
+    if tvdb_username is None \
+            or tvdb_user_key is None \
+            or tvdb_api_key is None \
+            or sonarr_ip is None \
+            or sonarr_port is None \
+            or sonarr_api_key is None:
+        raise ValueError('Mandatory variables cannot be empty')
 
     email_address = os.environ.get('EMAIL_ADDRESS')
     email_to_address = os.environ.get('EMAIL_TO_ADDRESS')
@@ -79,9 +91,9 @@ if __name__ == '__main__':
 
     while True:
         try:
-            print('Sleeping for one hour')
+            print('Sleeping for {0} seconds'.format(sync_interval))
             print()
-            sleep(int(os.environ.get('SYNC_INTERVAL')))
+            sleep(int(sync_interval))
 
             sonarr_headers = {
                 'X-API-KEY': sonarr_api_key
