@@ -17,11 +17,12 @@ def send_email(message):
     msg.set_content('Sonarr netimport list failure\n\n'
                     'Error msg: {0}'.format(message))
 
-    with smtplib.SMTP(os.environ.get('SMTP_SERVER'), int(os.environ.get('SMTP_SERVER_PORT'))) as smtp:
+    with smtplib.SMTP(smtp_server, int(smtp_server_port)) as smtp:
         smtp.ehlo()
         smtp.starttls()
         smtp.login(email_address, email_password)
         smtp.send_message(msg)
+    print('email sent')
     return None
 
 

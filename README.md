@@ -4,7 +4,7 @@ It can send email notification in case of an error with sync.
 
 Root folder for sonarr should be `/tv`.  
 All TV series are added to `any` sonarr profile.  
-If you want to change these two things, you can do it in the code, in the section
+If you want to change these two things, you can do it in the code, in the section;
 ```python
 sonarr_post_params = {
                 'addOptions': {'searchForMissingEpisodes': True},
@@ -29,6 +29,6 @@ Script variables are passed as environment variables. Supported variables are;
 * EMAIL_ADDRESS: Sender email address
 * EMAIL_TO_ADDRESS: Recipient email account 
 * EMAIL_PASSWORD: Sender email address password
-* SMTP_SERVER: smtp server 
+* SMTP_SERVER: smtp server. Example for gmail: smtp.gmail.com
 * SMTP_SERVER_PORT: Port number for smtp server
 
