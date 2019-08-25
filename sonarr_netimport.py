@@ -128,12 +128,4 @@ if __name__ == '__main__':
                 print('No shows to add to sonarr')
         except Exception as err:
             print('Unexpected error')
-            print(traceback.format_exc())
-            if email_address is None \
-                    or email_password is None \
-                    or smtp_server is None \
-                    or smtp_server_port is None:
-                pass
-            else:
-                print('sending email notification')
-                send_email(str(traceback.format_exc()))
+            raise
