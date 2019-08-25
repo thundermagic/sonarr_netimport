@@ -32,3 +32,28 @@ Script variables are passed as environment variables. Supported variables are;
 * SMTP_SERVER: smtp server. Example for gmail: smtp.gmail.com
 * SMTP_SERVER_PORT: Port number for smtp server
 
+# Docker Image
+Docker image is available at https://hub.docker.com/r/thundermagic/sonarr_netimport
+#### Example docker compose
+```yaml
+version: "2"
+services:
+    sonarr_netimport:
+        image: thundermagic/sonarr_netimport:arm32v7-latest
+        restart: on-failure
+        container_name: sonarr_netimport
+        environment:
+          - TVDB_USERNAME=first.last
+          - TVDB_USER_KEY=user_key
+          - TVDB_API_KEY=api_key
+          - SONARR_IP=192.168.4.4
+          - SONARR_PORT=8989
+          - SONARR_API_KEY=sonarr_key
+          - SYNC_INTERVAL=3600  # Interval at which to sync with TVDB, in seconds
+          # Below variables are for sending error notification emails. If not needed, delete these
+          - EMAIL_ADDRESS=first.last@gmail.com
+          - EMAIL_TO_ADDRESS=first.last@gmail.com
+          - EMAIL_PASSWORD=gmail_app_password
+          - SMTP_SERVER=smtp.gmail.com
+          - SMTP_SERVER_PORT=587
+```
