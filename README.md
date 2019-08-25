@@ -23,7 +23,7 @@ Script variables are passed as environment variables. Supported variables are;
 * SONARR_IP: IP address where sonarr is listening
 * SONARR_PORT: Port number for sonarr. default is 8989
 * SONARR_API_KEY: API key for sonarr
-* SYNC_INTERVAL: Interval to which to sync tv series from TVBD with sonarr
+* SYNC_INTERVAL: Interval at which to sync tv series from TVBD with sonarr in seconds
 
 #### Optional. These are for email notification
 * EMAIL_ADDRESS: Sender email address
