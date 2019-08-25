@@ -14,10 +14,10 @@ sonarr_post_params = {
             }
 ```
 
-#Config
+# Config
 Script variables are passed as environment variables. Supported variables are;
 
-####Mandatory
+#### Mandatory
 * TVDB_USERNAME: TVDB account username
 * TVDB_API_KEY: TVDB API key. You will be able to get this with your account
 * SONARR_IP: IP address where sonarr is listening
@@ -25,7 +25,7 @@ Script variables are passed as environment variables. Supported variables are;
 * SONARR_API_KEY: API key for sonarr
 * SYNC_INTERVAL: Interval to which to sync tv series from TVBD with sonarr
 
-####Optional. These are for email notification
+#### Optional. These are for email notification
 * EMAIL_ADDRESS: Sender email address
 * EMAIL_TO_ADDRESS: Recipient email account 
 * EMAIL_PASSWORD: Sender email address password
