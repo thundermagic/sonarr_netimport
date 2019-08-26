@@ -33,13 +33,16 @@ Script variables are passed as environment variables. Supported variables are;
 * SMTP_SERVER_PORT: Port number for smtp server
 
 # Docker Image
-Docker image is available at https://hub.docker.com/r/thundermagic/sonarr_netimport
+Docker image is available at https://hub.docker.com/r/thundermagic/sonarr_netimport.  
+Docker image is multi arch. Supported architectures are `arm` and `amd64`.  
+Docker manifest is used for multi arch awareness. So you just need to pull the image regardless of the underlying platform and the correct image will be pulled.  
+
 #### Example docker compose
 ```yaml
 version: "2"
 services:
     sonarr_netimport:
-        image: thundermagic/sonarr_netimport:arm32v7-latest
+        image: thundermagic/sonarr_netimport:latest
         restart: on-failure
         container_name: sonarr_netimport
         environment:
