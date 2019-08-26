@@ -1,7 +1,6 @@
 import requests
 import smtplib
 import os
-import traceback
 from time import sleep
 from email.message import EmailMessage
 
@@ -138,6 +137,6 @@ if __name__ == '__main__':
                         send_email('Show failed to be added: {0}'.format(failed))
             else:
                 print('No shows to add to sonarr')
-        except Exception as err:
+        except Exception:
             print('Unexpected error')
             raise
