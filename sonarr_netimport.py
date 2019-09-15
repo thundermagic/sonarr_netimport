@@ -74,12 +74,21 @@ if __name__ == '__main__':
     sonarr_port = os.environ.get('SONARR_PORT')
     sonarr_api_key = os.environ.get('SONARR_API_KEY')
 
+    search_missing_episodes = os.environ.get('SEARCH_MISSING_EPISODES')  # 1: True, any other value is False
+    quality_profile_id = os.environ.get('QUALITY_PROFILE_ID')  # Profile `any` is 1
+    monitored = os.environ.get('MONITORED')  # 1: True, any other value is False
+    root_folder_path = os.environ.get('ROOT_FOLDER_PATH')
+
     if tvdb_username is None \
             or tvdb_user_key is None \
             or tvdb_api_key is None \
             or sonarr_ip is None \
             or sonarr_port is None \
-            or sonarr_api_key is None:
+            or sonarr_api_key is None \
+            or search_missing_episodes is None \
+            or quality_profile_id is None \
+            or monitored is None \
+            or root_folder_path is None:
         raise ValueError('Mandatory variables cannot be empty')
 
     email_address = os.environ.get('EMAIL_ADDRESS')
@@ -100,10 +109,10 @@ if __name__ == '__main__':
             sonarr_url = 'http://{ip}:{port}/api/series'.format(ip=sonarr_ip, port=sonarr_port)
 
             sonarr_post_params = {
-                'addOptions': {'searchForMissingEpisodes': True},
-                'qualityProfileId': 1,  # Profile: any
-                'monitored': True,
-                'rootFolderPath': '/tv/'
+                'addOptions': {'searchForMissingEpisodes': True if int(search_missing_episodes) == 1 else False},
+                'qualityProfileId': int(quality_profile_id),  # Profile: 1 corresponds to `any` profile
+                'monitored': True if int(monitored) == 1 else False,
+                'rootFolderPath': root_folder_path  # full folder path (example: /tv/)
             }
 
             print('Getting shows from TVDB')

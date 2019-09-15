@@ -2,18 +2,6 @@
 A sloppy code written in python to fetch TV series from TVDB and add it to sonarr.
 It can send email notification in case of an error with sync.
 
-Root folder for sonarr should be `/tv`.  
-All TV series are added to `any` sonarr profile.  
-If you want to change these two things, you can do it in the code, in the section;
-```python
-sonarr_post_params = {
-                'addOptions': {'searchForMissingEpisodes': True},
-                'qualityProfileId': 1,  # Profile: any
-                'monitored': True,
-                'rootFolderPath': '/tv/'
-            }
-```
-
 # Config
 Script variables are passed as environment variables. Supported variables are;
 
@@ -24,6 +12,10 @@ Script variables are passed as environment variables. Supported variables are;
 * SONARR_PORT: Port number for sonarr. default is 8989
 * SONARR_API_KEY: API key for sonarr
 * SYNC_INTERVAL: Interval at which to sync tv series from TVBD with sonarr in seconds
+* SEARCH_MISSING_EPISODES: If to search for missing episode. Enter 1 for True. Any other value is False
+* QUALITY_PROFILE_ID: Quality profile. Profile `any` has ID of 1.
+* MONITORED: If to monitor the series. Enter 1 for True. Any other value is False
+* ROOT_FOLDER_PATH: root folder where series will be stored.
 
 #### Optional. These are for email notification
 * EMAIL_ADDRESS: Sender email address
@@ -48,11 +40,17 @@ services:
         environment:
           - TVDB_USERNAME=first.last
           - TVDB_USER_KEY=user_key
-          - TVDB_API_KEY=api_key
+          - TVDB_API_KEY=tvdb_api_key
+          # IP address and port number where sonarr can be accessed
           - SONARR_IP=192.168.4.4
           - SONARR_PORT=8989
+          # Sonarr app API key. This is on sonarr under settings>general
           - SONARR_API_KEY=sonarr_key
           - SYNC_INTERVAL=3600  # Interval at which to sync with TVDB, in seconds
+          - SEARCH_MISSING_EPISODES=1  # 1 is True
+          - QUALITY_PROFILE_ID=1  # 1 is profile any
+          - MONITORED=1  # 1 is True
+          - ROOT_FOLDER_PATH=/tv/  # Full path of root folder
           # Below variables are for sending error notification emails. If not needed, delete these
           - EMAIL_ADDRESS=first.last@gmail.com
           - EMAIL_TO_ADDRESS=first.last@gmail.com
