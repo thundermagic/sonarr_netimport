@@ -39,7 +39,14 @@ def get_tvdb_show_ids() -> set:
     jwt = get_tvdb_jwt()
     auth = {'Authorization': 'Bearer {0}'.format(jwt)}
     shows = requests.get('https://api.thetvdb.com/user/favorites', headers=auth)
-    show_ids = shows.json()['data']['favorites']
+    show_names = shows.json()['data']['favorites']
+    show_ids = []
+    for show in show_names:
+        search_show = requests.get('https://api.thetvdb.com/search/series', headers=auth, params={
+            'name': show
+        })
+        for resp in search_show.json()['data']:
+            show_ids.append(resp['id'])
     return set([int(show_id) for show_id in show_ids])
 
 
